@@ -1,0 +1,26 @@
+{
+  "name": "kira_tip_calculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkinShakira/Kira_tip_calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AkinShakira/Kira_tip_calculator/issues"
+  },
+  "homepage": "https://github.com/AkinShakira/Kira_tip_calculator#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.5",
+    "vite": "^2.9.14"
+  }
+}
