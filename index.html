@@ -1,12 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./build/tailwind.css" />
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <title>kira_tip_calculator</title>
+  </head>
+  <body class="font-sans tracking-wider">
+    <main class="bg-pink-300 px-4 py-2">
+      <div class="uppercase font-extrabold text-pink-800 text-md flex flex-col h-12 items-center justify-between">
+        <p class="w-20 flex justify-between">
+          <span>s</span>
+          <span>p</span>
+          <span>l</span>
+          <span>i</span>
+        </p>
+
+        <p class="w-20 flex justify-between">
+          <span>t</span>
+          <span>t</span>
+          <span>e</span>
+          <span>r</span>
+        </p>
+      </div>
+
+      <div class="bg-white w-4/5 mx-auto border-none rounded-2xl mt-8 px-5 py-6 font-serif md:flex justify-between">
+
+        <section class="capitalize text-pink-400 w-1/2 mr-4">
+
+          <form class="flex flex-col mb-8">
+            <label for="bill" class="mb-2">bill</label>
+            <input type="number" id="
+          bill" class="usd-input bg-pink-100 border-none rounded-md h-10">
+          </form>
+
+          <div class="mb-8">
+            <h3 class="mb-1">Select Tip %</h3>
+            <div class="text-white text-md grid grid-cols-3 gap-4">
+              <button class="bg-pink-800 py-2 flex items-center justify-center border-none rounded-md">
+                5%
+              </button>
+              <button class="bg-pink-800 py-2 flex items-center justify-center border-none rounded-md">
+                10%
+              </button>
+              <button class="bg-pink-800 py-2 flex items-center justify-center border-none rounded-md">
+                15%
+              </button>
+              <button class="bg-pink-800 py-2 flex items-center justify-center border-none rounded-md">
+                25%
+              </button>
+              <button class="bg-pink-800 py-2 flex items-center justify-center border-none rounded-md">
+                50%
+              </button>
+              <button class="bg-pink-100 text-pink-800 py-2 flex items-center justify-center border-none rounded-md">
+                Custom
+              </button>
+            </div>
+          </div>
+
+          <form class="flex flex-col ">
+            <label for="people" class="mb-2">number of people</label>
+            <input type="number" id="people" class="bg-pink-100 border-none rounded-md h-10">
+          </form>
+
+        </section>
+        
+        <section class="w-1/2 ml-4 bg-pink-800 border-none rounded-lg px-6 pt-12 pb-4 text-white">
+
+          <div>
+            <div class="flex justify-between mb-8">
+              <p class="flex flex-col ">
+                <span class="capitalize mb-1">tip amount</span>
+                <span class="text-pink-200 text-sm">/  person</span>
+              </p>
+
+              <span class="text-3xl text-pink-400">
+                $0.00
+              </span>
+            </div>
+
+            <div class="flex justify-between mb-20">
+              <p class="flex flex-col ">
+                <span class="capitalize mb-1">total</span>
+                <span class="text-pink-200 text-sm">/ person</span>
+              </p>
+
+              <span class="text-3xl text-pink-400">
+                $0.00
+              </span>
+            </div>
+          </div>
+
+          <button class="w-full bg-pink-400 text-pink-800 uppercase font-bold font-sans border-none rounded-md py-3">
+            reset
+          </button>
+        </section>
+      </div>
+
+    </main>
+  </body>
 </html>
+
