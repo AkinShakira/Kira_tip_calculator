@@ -7,12 +7,7 @@
 //   document.querySelector(".js-custom-tip-input").value
 // );
 
-
-const tip5 = document.querySelector('.js-btn-5');
-const tip10 = document.querySelector('.js-btn-10');
-const tip15 = document.querySelector('.js-btn-15');
-const tip25 = document.querySelector('.js-btn-25');
-const tip50 = document.querySelector('.js-btn-50');
+const btnTip = document.querySelectorAll(".js-btn-tip");
 const btnCustomTip = document.querySelector('.js-btn-custom');
 const totalTip = document.querySelector('.js-total-tip-fig');
 const totalPerPerson = document.querySelector('.js-total-person-fig');
@@ -23,8 +18,12 @@ const overlay = document.querySelector('.overlay');
 const inputAlert = document.querySelector('.input-alert');
 
 
-function toggleOverlay() {
+function toggleCustomForm() {
   customForm.classList.toggle("hidden");
+}
+  
+
+function toggleOverlay() {
   overlay.classList.toggle("hidden");
 }
 
@@ -66,6 +65,7 @@ function CalcCustomTip() {
    totalBill = totalTipAmt + bill;
    billEach = totalBill / totalPeople;
    toggleOverlay();
+   toggleCustomForm();
  }
  else {
    alertModal();
@@ -79,21 +79,10 @@ function CalcCustomTip() {
 
 
 
-tip5.addEventListener("click", calcTip);
-tip10.addEventListener("click", calcTip);
-tip15.addEventListener("click", calcTip);
-tip25.addEventListener("click", calcTip);
-tip50.addEventListener("click", calcTip);
+for (let i = 0; i < btnTip.length; i++) {
+  btnTip[i].addEventListener("click", calcTip);
+};
 btnCustomTip.addEventListener('click', toggleOverlay);
 btnCalcCustomTip.addEventListener('click', CalcCustomTip);
 
 
-
-
-
-// Trying to select all buttons once and add eventlistner to the group
-// const btnTip = document.querySelectorAll(".js-btn-tip");
-// const btnTip = document.getElementsByClassName("js-btn-tip");
-// eachBtnTip.onClick = eachBtnTip.map(calcTip);
-// console.log(btnTip);
-// console.log(eachBtnTip);
