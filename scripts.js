@@ -1,11 +1,15 @@
 "use strict";
 
 // // to be deleted
-// const bill = Number(document.querySelector(".js-bill").value);
-// const totalPeople = document.querySelector(".js-num-people").value;
-// const customInput = Number(
-//   document.querySelector(".js-custom-tip-input").value
-// );
+const billElem = document.querySelector(".js-bill");
+const billValue = Number(document.querySelector(".js-bill").value);
+
+const totalPeopleElem = document.querySelector(".js-num-people");
+const totalPeopleValue = Number(document.querySelector(".js-num-people").value);
+
+const customInput = Number(
+  document.querySelector(".js-custom-tip-input").value
+);
 
 const btnTip = document.querySelectorAll(".js-btn-tip");
 const btnCustomTip = document.querySelector(".js-btn-custom");
@@ -20,11 +24,20 @@ const btnCloseOverlay = document.querySelectorAll(".btn-close-overlay");
 let appActive = true;
 
 
-function displayCustomForm() {
-  const bill = Number(document.querySelector(".js-bill").value);
-  const totalPeople = Number(document.querySelector(".js-num-people").value);
 
-  if (bill !== 0 && totalPeople !== 0) {
+// function startingValues() {
+//   billValue = 0;
+//   totalPeopleValue = 0;
+//   totalTip.textContent = 0;
+//   totalPerPerson.textContent = 0;
+//   appActive = true; 
+// }
+
+function displayCustomForm() {
+  const billValue = Number(document.querySelector(".js-bill").value);
+  const totalPeopleValue = Number(document.querySelector(".js-num-people").value);
+
+  if (billValue !== 0 && totalPeopleValue !== 0) {
     customForm.classList.remove("hidden");
     overlay.classList.remove("hidden");
   } else {
@@ -48,28 +61,39 @@ function hideOverlay() {
   overlay.classList.add("hidden");
 }
 
+function disableApp() {
+  appActive = false;
+  for (let i = 0; i < btnTip.length; i++) {
+    btnTip[i].classList.remove("hover:bg-pink-700");
+  };
+  btnCustomTip.classList.remove("hover:bg-pink-300");
+  billElem.setAttribute('disabled', '');
+  totalPeopleElem.setAttribute("disabled", "");
+};
+  
+
 function calcTip() {
-  const bill = Number(document.querySelector(".js-bill").value);
-  const totalPeople = Number(document.querySelector(".js-num-people").value);
+  const billValue = Number(document.querySelector(".js-bill").value);
+  const totalPeopleValue = Number(document.querySelector(".js-num-people").value);
   const t = Number(this.value);
 
   if (appActive){
-    if (bill !== 0 && totalPeople !== 0) {
-      let totalTipAmt = (t / 100) * bill;
-      let totalBill = totalTipAmt + bill;
-      let billEach = totalBill / totalPeople;
+    if (billValue !== 0 && totalPeopleValue !== 0) {
+      let totalTipAmt = (t / 100) * billValue;
+      let totalBill = totalTipAmt + billValue;
+      let billEach = totalBill / totalPeopleValue;
       totalTip.textContent = totalTipAmt.toFixed(2);
       totalPerPerson.textContent = billEach.toFixed(2);
-      appActive = false;
+      disableApp();
     } else {
       displayAlertModal();
-      }
+    }
   }
 }
 
 function calcCustomTip() {
-  const bill = Number(document.querySelector(".js-bill").value);
-  const totalPeople = Number(document.querySelector(".js-num-people").value);
+  const billValue = Number(document.querySelector(".js-bill").value);
+  const totalPeopleValue = Number(document.querySelector(".js-num-people").value);
   const customInput = Number(
     document.querySelector(".js-custom-tip-input").value
   );
@@ -78,10 +102,10 @@ function calcCustomTip() {
     billEach = 0;
 
   if (appActive) {
-    if (bill !== 0 && totalPeople !== 0) {
-      totalTipAmt = (customInput / 100) * bill;
-      totalBill = totalTipAmt + bill;
-      billEach = totalBill / totalPeople;
+    if (billValue !== 0 && totalPeopleValue !== 0) {
+      totalTipAmt = (customInput / 100) * billValue;
+      totalBill = totalTipAmt + billValue;
+      billEach = totalBill / totalPeopleValue;
       hideCustomForm();
     }
   }
@@ -89,13 +113,9 @@ function calcCustomTip() {
   totalTip.textContent = totalTipAmt.toFixed(2);
   totalPerPerson.textContent = billEach.toFixed(2);
   btnCustomTip.textContent = customInput + "%";
-  appActive = false;
-
+  disableApp();
 }
 
-function resetApp() {
-  
-}
 
 
 
@@ -116,3 +136,5 @@ overlay.addEventListener("click", hideOverlay);
 for (let i = 0; i < btnCloseOverlay.length; i++) {
   btnCloseOverlay[i].addEventListener("click", hideOverlay);
 }
+
+btnReset.addEventListener('click', startingValues)
