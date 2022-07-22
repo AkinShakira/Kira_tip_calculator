@@ -28,9 +28,11 @@ function startApp() {
   totalPerPerson.textContent = "0.00";
   billElem.removeAttribute("disabled", "");
   totalPeopleElem.removeAttribute("disabled", "");
+  btnCustomTip.textContent = 'Custom';
   function clearInput() {
     billInput.value = "";
     totalPeopleInput.value = "";
+    btnCustomTip
   };
   clearInput();
 }
@@ -40,15 +42,62 @@ function getInputValues() {
   const totalPeopleValue = Number(totalPeopleInput.value);
 }
 
+function calcTip() {
+  const billValue = Number(billInput.value);
+  const totalPeopleValue = Number(totalPeopleInput.value);
+  const t = Number(this.value);
+
+  if (appActive) {
+    if (billValue !== 0 && totalPeopleValue !== 0) {
+      let totalTipAmt = (t / 100) * billValue;
+      let totalBill = totalTipAmt + billValue;
+      let billEach = totalBill / totalPeopleValue;
+      totalTip.textContent = totalTipAmt.toFixed(2);
+      totalPerPerson.textContent = billEach.toFixed(2);
+      // To show the active button... Not working
+      // activeBtn();
+      disableApp();
+    } else {
+      displayAlertModal();
+    }
+  }
+}
+
+function calcCustomTip() {
+  const billValue = Number(billInput.value);
+  const totalPeopleValue = Number(totalPeopleInput.value);
+  const customInput = Number(
+    document.querySelector(".js-custom-tip-input").value
+  );
+  let totalTipAmt = 0,
+    totalBill = 0,
+    billEach = 0;
+
+  if (appActive) {
+    if (billValue !== 0 && totalPeopleValue !== 0) {
+      totalTipAmt = (customInput / 100) * billValue;
+      totalBill = totalTipAmt + billValue;
+      billEach = totalBill / totalPeopleValue;
+    }
+    totalTip.textContent = totalTipAmt.toFixed(2);
+    totalPerPerson.textContent = billEach.toFixed(2);
+    btnCustomTip.textContent = customInput + "%";
+    hideCustomForm();
+    disableApp();
+    // activeBtn();
+  }
+}
+
 function displayCustomForm() {
   const billValue = Number(billInput.value);
   const totalPeopleValue = Number(totalPeopleInput.value);
-
-  if (billValue !== 0 && totalPeopleValue !== 0) {
-    customForm.classList.remove("hidden");
-    overlay.classList.remove("hidden");
-  } else {
-    displayAlertModal();
+  if (appActive)  {
+    if (billValue !== 0 && totalPeopleValue !== 0) {
+      customForm.classList.remove("hidden");
+      overlay.classList.remove("hidden");
+    } else {
+      displayAlertModal();
+    }
   }
 }
 
@@ -86,65 +135,13 @@ function disableApp() {
 // }
 // }
 
-function calcTip() {
-  const billValue = Number(billInput.value);
-  const totalPeopleValue = Number(totalPeopleInput.value);
-  // console.log(billValue, totalPeopleValue);
-  const t = Number(this.value);
-
-  if (appActive) {
-    if (billValue !== 0 && totalPeopleValue !== 0) {
-      let totalTipAmt = (t / 100) * billValue;
-      let totalBill = totalTipAmt + billValue;
-      let billEach = totalBill / totalPeopleValue;
-      totalTip.textContent = totalTipAmt.toFixed(2);
-      totalPerPerson.textContent = billEach.toFixed(2);
-      // To show the active button... Not working
-      // activeBtn();
-      disableApp();
-    } else {
-      displayAlertModal();
-    }
-  }
-}
-
-function calcCustomTip() {
-  const billValue = Number(billInput.value);
-  const totalPeopleValue = Number(totalPeopleInput.value);
-  const customInput = Number(
-    document.querySelector(".js-custom-tip-input").value
-  );
-  let totalTipAmt = 0,
-    totalBill = 0,
-    billEach = 0;
-
-  if (appActive) {
-    if (billValue !== 0 && totalPeopleValue !== 0) {
-      totalTipAmt = (customInput / 100) * billValue;
-      totalBill = totalTipAmt + billValue;
-      billEach = totalBill / totalPeopleValue;
-      hideCustomForm();
-    }
-  }
-
-  totalTip.textContent = totalTipAmt.toFixed(2);
-  totalPerPerson.textContent = billEach.toFixed(2);
-  btnCustomTip.textContent = customInput + "%";
-  // activeBtn();
-  disableApp();
-}
-
 for (let i = 0; i < btnTip.length; i++) {
   btnTip[i].addEventListener("click", calcTip);
   // To show the active button... Not working
   // btnTip[i].addEventListener('click', activeBtn);
 }
 
-btnCustomTip.addEventListener("click", () => {
-  if (appActive) {
-    displayCustomForm();
-  }
-});
+btnCustomTip.addEventListener("click", displayCustomForm);
 
 btnCalcCustomTip.addEventListener("click", calcCustomTip);
 
