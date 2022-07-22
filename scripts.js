@@ -1,9 +1,7 @@
 "use strict";
 
-const billElem = document.querySelector(".js-bill");
-let billInput = document.querySelector(".js-bill");
-const totalPeopleElem = document.querySelector(".js-num-people");
-let totalPeopleInput = document.querySelector(".js-num-people");
+const billInput = document.querySelector(".js-bill");
+const totalPeopleInput = document.querySelector(".js-num-people");
 const customInput = document.querySelector(".js-custom-tip-input");
 
 const btnTip = document.querySelectorAll(".js-btn-tip");
@@ -22,8 +20,8 @@ function startApp() {
   appActive = true;
   totalTip.textContent = "0.00";
   totalPerPerson.textContent = "0.00";
-  billElem.removeAttribute("disabled", "");
-  totalPeopleElem.removeAttribute("disabled", "");
+  billInput.removeAttribute("disabled", "");
+  totalPeopleInput.removeAttribute("disabled", "");
   btnCustomTip.textContent = 'Custom';
   function clearInput() {
     billInput.value = "";
@@ -117,8 +115,8 @@ function disableApp() {
     btnTip[i].classList.remove("hover:bg-pink-700");
   }
   btnCustomTip.classList.remove("hover:bg-pink-300");
-  billElem.setAttribute("disabled", "");
-  totalPeopleElem.setAttribute("disabled", "");
+  billInput.setAttribute("disabled", "");
+  totalPeopleInput.setAttribute("disabled", "");
 }
 
 // To show the active button... Not working
