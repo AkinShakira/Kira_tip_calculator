@@ -70,13 +70,13 @@ function calcCustomTip() {
       totalTipAmt = (customTipValue / 100) * billValue;
       totalBill = totalTipAmt + billValue;
       billEach = totalBill / totalPeopleValue;
+      totalTip.textContent = totalTipAmt.toFixed(2);
+      totalPerPerson.textContent = billEach.toFixed(2);
+      btnCustomTip.textContent = customTipValue + "%";
+      hideCustomForm();
+      disableApp();
+      // activeBtn();
     }
-    totalTip.textContent = totalTipAmt.toFixed(2);
-    totalPerPerson.textContent = billEach.toFixed(2);
-    btnCustomTip.textContent = customTipValue + "%";
-    hideCustomForm();
-    disableApp();
-    // activeBtn();
   }
 }
 
