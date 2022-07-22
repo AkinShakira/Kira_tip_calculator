@@ -2,13 +2,9 @@
 
 const billElem = document.querySelector(".js-bill");
 let billInput = document.querySelector(".js-bill");
-
 const totalPeopleElem = document.querySelector(".js-num-people");
 let totalPeopleInput = document.querySelector(".js-num-people");
-
-const customInput = Number(
-  document.querySelector(".js-custom-tip-input").value
-);
+const customInput = document.querySelector(".js-custom-tip-input");
 
 const btnTip = document.querySelectorAll(".js-btn-tip");
 const btnCustomTip = document.querySelector(".js-btn-custom");
@@ -32,7 +28,7 @@ function startApp() {
   function clearInput() {
     billInput.value = "";
     totalPeopleInput.value = "";
-    btnCustomTip
+    customInput.value = "";
   };
   clearInput();
 }
@@ -66,22 +62,20 @@ function calcTip() {
 function calcCustomTip() {
   const billValue = Number(billInput.value);
   const totalPeopleValue = Number(totalPeopleInput.value);
-  const customInput = Number(
-    document.querySelector(".js-custom-tip-input").value
-  );
+  const customTipValue = Number(customInput.value);
   let totalTipAmt = 0,
     totalBill = 0,
     billEach = 0;
 
   if (appActive) {
     if (billValue !== 0 && totalPeopleValue !== 0) {
-      totalTipAmt = (customInput / 100) * billValue;
+      totalTipAmt = (customTipValue / 100) * billValue;
       totalBill = totalTipAmt + billValue;
       billEach = totalBill / totalPeopleValue;
     }
     totalTip.textContent = totalTipAmt.toFixed(2);
     totalPerPerson.textContent = billEach.toFixed(2);
-    btnCustomTip.textContent = customInput + "%";
+    btnCustomTip.textContent = customTipValue + "%";
     hideCustomForm();
     disableApp();
     // activeBtn();
