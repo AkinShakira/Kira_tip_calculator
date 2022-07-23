@@ -1,23 +1,21 @@
-/* #bill  {
-  background-image: url("./images/usd.svg");  
-  background-position: center;
+#bill  {
+  background-image: url("../images/nigeria-naira-currency-symbol.png");  
+  background-position: 0.7rem center;
   background-repeat: no-repeat;
-  background-size: 2rem;
+  background-size: 1rem;
 }
 
-#people  {
-  background-image: url("./images/user.svg");  
-  background-position: center;
+#num-people  {
+  background-image: url("../images/user.png");  
+  background-position:  0.7rem center;
   background-repeat: no-repeat;
-  background-size: 2rem;
+  background-size: 1rem;
 }
-*/
 
-/* 
+#custom-tip  {
+  background-image: url("../images/percentage.png");  
+  background-position:  0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 0.8rem;
+}
 
-.fa-usd {
-  font-family: FontAwesome;
-  margin: 0 auto;
-  font-size: 5rem;
-  font-style: normal;
-} */
