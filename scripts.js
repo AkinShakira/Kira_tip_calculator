@@ -22,12 +22,14 @@ function startApp() {
   totalPerPerson.textContent = "0.00";
   billInput.removeAttribute("disabled", "");
   totalPeopleInput.removeAttribute("disabled", "");
-  btnCustomTip.textContent = 'Custom';
+  btnCustomTip.textContent = "Custom";
+  for (let i = 0; i < btnTip.length; i++) btnTip[i].classList.replace("bg-pink-600", "bg-pink-800");
+  btnCustomTip.classList.replace("bg-pink-400", "bg-pink-100");
   function clearInput() {
     billInput.value = "";
     totalPeopleInput.value = "";
     customInput.value = "";
-  };
+  }
   clearInput();
 }
 
@@ -48,9 +50,10 @@ function calcTip() {
       let billEach = totalBill / totalPeopleValue;
       totalTip.textContent = totalTipAmt.toFixed(2);
       totalPerPerson.textContent = billEach.toFixed(2);
-      // To show the active button... Not working
-      // activeBtn();
+      const activeTipBtn = () => this.classList.replace("bg-pink-800", "bg-pink-600");
+      activeTipBtn();
       disableApp();
+
     } else {
       displayAlertModal();
     }
@@ -96,6 +99,9 @@ function displayCustomForm() {
 function hideCustomForm() {
   customForm.classList.add("hidden");
   overlay.classList.add("hidden");
+  const activeCustomBtn = () =>
+    btnCustomTip.classList.replace("bg-pink-100", "bg-pink-400");
+  activeCustomBtn();
 }
 
 function displayAlertModal() {
@@ -119,18 +125,10 @@ function disableApp() {
   totalPeopleInput.setAttribute("disabled", "");
 }
 
-// To show the active button... Not working
-// function activeBtn() {
-//   // for (let i = 0; i < btnTip.length; i++) {
-//     btnTip[i].classList.remove("bg-pink-800");
-//     btnTip[i].classList.add("bg-pink-100");
-// }
-// }
 
 for (let i = 0; i < btnTip.length; i++) {
   btnTip[i].addEventListener("click", calcTip);
-  // To show the active button... Not working
-  // btnTip[i].addEventListener('click', activeBtn);
+  
 }
 
 btnCustomTip.addEventListener("click", displayCustomForm);
