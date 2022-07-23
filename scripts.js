@@ -78,7 +78,6 @@ function calcCustomTip() {
       btnCustomTip.textContent = customTipValue + "%";
       hideCustomForm();
       disableApp();
-      // activeBtn();
     }
   }
 }
