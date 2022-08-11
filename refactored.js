@@ -137,7 +137,7 @@ function getCustomTip () {
 };
 
 
-// DESELECT ANT SELECTED TIP BUTTON
+// DESELECTS ANY SELECTED TIP BUTTON
 const deselectTipButton = () => {
   btnTip.forEach((btn) =>
     btn.classList.replace("bg-pink-600", "bg-pink-800")
@@ -166,7 +166,7 @@ return {
 // WORKING
 // ENCOMPASSES ALL FUNCTIONS TO CALL WHEN A TIP BUTTON IS CLICKED 
 function tipButtonsHandler() {
-  // DESELECT ANT SELECTED TIP BUTTON
+  // DESELECTS ANY SELECTED TIP BUTTON
   deselectTipButton();
   
 
@@ -176,7 +176,6 @@ function tipButtonsHandler() {
 
   // VALIDATE ALL USER INPUT
   const { valid, error } = validateUserInput(billValue, numberOfPeople);
-  console.log({ valid, error });
   if (valid === false) {
     displayAlertModal(error);
     return;
@@ -202,15 +201,8 @@ function tipButtonsHandler() {
   // PRINT VALUES
   totalTipResult.textContent = totalTipAmount;
   totalPerPersonResult.textContent = billPerPerson;
-  console.log(
-    billValue,
-    numberOfPeople,
-    selectedTipPercentage,
-    totalTipAmount,
-    billPerPerson
-  );
 
-  // NOT WORKING
+  // HIGHLIGHTS SELECTED TIP BUTTON
   const selectedTipButton = () => {
     this.classList.replace("bg-pink-800", "bg-pink-600");
   };
