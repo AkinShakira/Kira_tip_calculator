@@ -78,16 +78,6 @@ function getUserInputValue() {
 
 
 
-// WORKING
-// THIS GETS THE CUSTOM TIP VALUE FROM 
-function getCustomTip () {
-  const selectedTipPercentage = Number(customTipInput.value);
-  return {
-    selectedTipPercentage,
-  };
-};
-
-
 
 // WORKING
 // VALIDATES USER INPUT
@@ -138,6 +128,24 @@ function validateUserInput(billValue, numberOfPeople) {
 
 
 // WORKING
+// THIS GETS THE CUSTOM TIP VALUE FROM 
+function getCustomTip () {
+  const selectedTipPercentage = Number(customTipInput.value);
+  return {
+    selectedTipPercentage,
+  };
+};
+
+
+// DESELECT ANT SELECTED TIP BUTTON
+const deselectTipButton = () => {
+  btnTip.forEach((btn) =>
+    btn.classList.replace("bg-pink-600", "bg-pink-800")
+  );
+};
+
+
+// WORKING
 // CALCULATES THE TIP AMOUNT AND BILL PER PERSON
 function calculateTotalTipAndBillPerPerson(
   billValue,
@@ -155,15 +163,18 @@ return {
 
 
 
-
 // WORKING
 // ENCOMPASSES ALL FUNCTIONS TO CALL WHEN A TIP BUTTON IS CLICKED 
 function tipButtonsHandler() {
+  // DESELECT ANT SELECTED TIP BUTTON
+  deselectTipButton();
+  
+
   // GET USER INPUT
   const { billValue = 0, numberOfPeople = 0 } = getUserInputValue();
 
 
-  // VALIDATE ALL USER INPUT 
+  // VALIDATE ALL USER INPUT
   const { valid, error } = validateUserInput(billValue, numberOfPeople);
   console.log({ valid, error });
   if (valid === false) {
@@ -171,26 +182,23 @@ function tipButtonsHandler() {
     return;
   }
 
-
   // GET TIP VALUE
   const getTipBtnValue = () => {
     const selectedTipPercentage = Number(this.value);
     return {
       selectedTipPercentage,
     };
-  }
+  };
   const { selectedTipPercentage = 0 } = getTipBtnValue();
 
 
   // CALCULATE THE TIP AMOUUNT AND BILL PER PERSON
-  const { totalTipAmount, billPerPerson } =
-    calculateTotalTipAndBillPerPerson(
-      billValue,
-      numberOfPeople,
-      selectedTipPercentage
-    );
+  const { totalTipAmount, billPerPerson } = calculateTotalTipAndBillPerPerson(
+    billValue,
+    numberOfPeople,
+    selectedTipPercentage
+  );
 
-  
   // PRINT VALUES
   totalTipResult.textContent = totalTipAmount;
   totalPerPersonResult.textContent = billPerPerson;
@@ -202,8 +210,11 @@ function tipButtonsHandler() {
     billPerPerson
   );
 
-  //   selectedTipButton();
-
+  // NOT WORKING
+  const selectedTipButton = () => {
+    this.classList.replace("bg-pink-800", "bg-pink-600");
+  };
+  selectedTipButton();
 }
 
 
@@ -212,7 +223,6 @@ function customTipHandler() {
   // GET USER INPUT
   const { billValue = 0, numberOfPeople = 0 } = getUserInputValue();
 
-
   // VALIDATE ALL USER INPUT
   const { valid, error } = validateUserInput(billValue, numberOfPeople);
   if (valid === false) {
@@ -220,10 +230,8 @@ function customTipHandler() {
     return;
   }
 
-
   // GET TIP VALUE
   const { selectedTipPercentage = 0 } = getCustomTip();
-
 
   // CALCULATE THE TIP AMOUUNT AND BILL PER PERSON
   const { totalTipAmount, billPerPerson } = calculateTotalTipAndBillPerPerson(
@@ -231,7 +239,6 @@ function customTipHandler() {
     numberOfPeople,
     selectedTipPercentage
   );
-
 
   // PRINT VALUES
   totalTipResult.textContent = totalTipAmount;
@@ -247,7 +254,6 @@ function displaycustomTipForm() {
   // GET USER INPUT
   const { billValue = 0, numberOfPeople = 0 } = getUserInputValue();
 
-
   // VALIDATE ALL USER INPUT
   const { valid, error } = validateUserInput(billValue, numberOfPeople);
   if (valid === false) {
@@ -255,8 +261,10 @@ function displaycustomTipForm() {
     return;
   }
 
+  // DESELECT ANY SELECTED TIP BUTTON
+  deselectTipButton();
 
-  // VALIDATE ALL USER INPUT
+  // DISPLAY CUSTOM TIP INPUT AREA
   customTipForm.classList.remove("hidden");
   overlay.classList.remove("hidden");
 }
