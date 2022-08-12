@@ -33,17 +33,9 @@ const totalPerPersonResult = document.querySelector(".js-total-person-fig");
 // SET THE INITIAL STATE WHEN THE APP IS LOADED
 
 function initialState() {
-    totalTipResult.textContent = "0.00";
-    totalPerPersonResult.textContent = "0.00";
-    billInput.removeAttribute("disabled", "");
-    numberOfPeopleInput.removeAttribute("disabled", "");
-    btnCustomTip.textContent = "Custom";
-
-    for (let i = 0; i < btnTip.length; i++) {
-        btnTip[i].classList.replace("bg-pink-600", "bg-pink-800");
-    }
-
-    btnCustomTip.classList.replace("bg-pink-400", "bg-pink-100");
+  totalTipResult.textContent = "0.00";
+  totalPerPersonResult.textContent = "0.00";
+  btnTip.forEach(btn => btn.classList.replace("bg-pink-600", "bg-pink-800"));
 }
 
 
@@ -52,15 +44,23 @@ function initialState() {
 function clearInput() {
     billInput.value = "";
     numberOfPeopleInput.value = "";
-    customTipInput.value = "";
 }
+
+// RESETS THE CUSTOM BUTTON
+function resetCustomTipBtn () {
+  btnCustomTip.textContent = "Custom";
+  btnCustomTip.classList.replace("bg-pink-400", "bg-pink-100");
+  customTipInput.value = ""; 
+}
+
 
 // WORKING
 // THIS RESETS THE APP TO THE INITIAL STATE AND CLEARS ALL INPUT AREAS 
 function startApp() {
-    // this set required initial states
-    initialState();
-    clearInput();
+  // this set required initial states
+  initialState();
+  clearInput();
+  resetCustomTipBtn();
 }
 
 
@@ -139,6 +139,8 @@ function getCustomTip () {
 
 // DESELECTS ANY SELECTED TIP BUTTON
 const deselectTipButton = () => {
+
+
   btnTip.forEach((btn) =>
     btn.classList.replace("bg-pink-600", "bg-pink-800")
   );
@@ -168,11 +170,12 @@ return {
 function tipButtonsHandler() {
   // DESELECTS ANY SELECTED TIP BUTTON
   deselectTipButton();
-  
+
+  // RESETS THE CUSTOM BUTTON
+  resetCustomTipBtn();
 
   // GET USER INPUT
   const { billValue = 0, numberOfPeople = 0 } = getUserInputValue();
-
 
   // VALIDATE ALL USER INPUT
   const { valid, error } = validateUserInput(billValue, numberOfPeople);
@@ -189,7 +192,6 @@ function tipButtonsHandler() {
     };
   };
   const { selectedTipPercentage = 0 } = getTipBtnValue();
-
 
   // CALCULATE THE TIP AMOUUNT AND BILL PER PERSON
   const { totalTipAmount, billPerPerson } = calculateTotalTipAndBillPerPerson(
@@ -305,6 +307,12 @@ btnTip.forEach(btn => btn.addEventListener("click", tipButtonsHandler));
 btnCustomTip.addEventListener("click", displaycustomTipForm);
 
 btnCalcCustomTip.addEventListener("click", customTipHandler);
+
+customTipInput.addEventListener("keyup", function (e) {
+  if (e.key === 'Enter') customTipHandler()
+})
+
+// window.addEventListener("keypress", )
 
 overlay.addEventListener("click", hideOverlay);
 
